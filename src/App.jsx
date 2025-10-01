@@ -24,6 +24,7 @@ function App() {
 
   return (
     <>
+         <div className='body-filter-container'>
       <div className='app-container'>
         <h1>Countries and Flags</h1>
         <div className='search-container'>
@@ -37,22 +38,26 @@ function App() {
           <input 
           className='show-btn'
           type='button'
-          value='Show all'
+          value={showFlags ? "Only result" : "Show all"}
           onClick={() => setShowFlags((prev) => !prev)}
           />
         </div>
         <div className='content-container'>
           <ul>
-            {showFlags ? (
-              names.map((item) => (
-                <li key={item.name.common} className='country-block'>
-                  <p className='country-name'>{item.name.common}</p>
+            {
+              showFlags && searchInput.trim() === "" ?(
+                names.map((item) => (
+                  <li key={item.name.common} className='country-block'>
+                    <p className='country-name'>{item.name.common}</p>
                   {item.flags.png && (
                     <img className='flag' src={item.flags.png} alt={`${item.name.common} flag`} />
                   )}
                 </li>
               ))
-            ) : searchInput.trim() === "" ? (
+            )
+            :
+            
+              searchInput.trim() === "" ? (
               <p>Type to search country.</p>
             ) : filteredCountries.length === 0 ? (
               <p>No country found.</p>
@@ -69,6 +74,8 @@ function App() {
           </ul>
         </div>
       </div>
+ </div>
+
     </>
   )
 }
