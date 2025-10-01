@@ -43,16 +43,17 @@ function App() {
         </div>
         <div className='content-container'>
           <ul>
-            {searchInput.trim() === "" ? (
+            {showFlags ? (
               names.map((item) => (
-                 showFlags &&
-                 <li key={item.name.common} className='country-block'>
+                <li key={item.name.common} className='country-block'>
                   <p className='country-name'>{item.name.common}</p>
-                  { item.flags.png && (
+                  {item.flags.png && (
                     <img className='flag' src={item.flags.png} alt={`${item.name.common} flag`} />
                   )}
                 </li>
-              )),<p> type to search country. </p>
+              ))
+            ) : searchInput.trim() === "" ? (
+              <p>Type to search country.</p>
             ) : filteredCountries.length === 0 ? (
               <p>No country found.</p>
             ) : (
@@ -64,10 +65,7 @@ function App() {
                   )}
                 </li>
               ))
-            )
-            
-            }
-            
+            )}
           </ul>
         </div>
       </div>
